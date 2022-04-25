@@ -1,0 +1,21 @@
+name: publish-action
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+
+jobs:
+  release:
+    name: Release GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Release GitHub Action
+        uses: technote-space/release-github-actions@v7

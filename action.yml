@@ -1,0 +1,17 @@
+name: 'Your name here'
+description: 'Provide a description here'
+author: 'Jamie Nelson <jamie@bitflight.io>'
+inputs:
+  token:
+    required: false
+    description: 'GitHub Secret Token'
+  fail_on_error:
+    required: false
+    description: 'Fail on error'
+    default: 'false'
+branding:
+  icon: 'tag'
+  color: 'green'
+runs:
+  using: 'node16'
+  main: 'lib/main.js'

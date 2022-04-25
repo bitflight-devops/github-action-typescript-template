@@ -1,0 +1,11 @@
+dist/
+lib/
+node_modules/
+jest.config.js
+.trunk/
+.vscode/
+/package-lock.json
+/yarn.lock
+!/.github
+!/.eslintrc.js
+!/.*.config.js

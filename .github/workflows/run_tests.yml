@@ -1,0 +1,28 @@
+name: Push - Run Yarn Tests
+'on':
+  push:
+
+jobs:
+  unit_tests:
+    runs-on: Ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Run Yarn
+        run: yarn
+
+      - name: Run Yarn Tests
+        run: yarn test-ci
+
+      - uses: IgnusG/jest-report-action@v2.3.3
+        if: always() # Or use "continue-on-error: true" in previous test step
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
