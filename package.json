@@ -79,7 +79,7 @@
     "@octokit/graphql": "^4.8.0",
     "@octokit/rest": "^18.12.0",
     "ansi-colors": "^4.1.1",
-    "graphql": "^16.3.0",
+    "graphql": "^16.4.0",
     "lodash": "^4.17.21",
     "tslib": "^2.3.1",
     "yaml": "^2.0.0"
