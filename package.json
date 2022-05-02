@@ -1,12 +1,10 @@
 {
+  "private": true,
   "name": "@bitflight-devops/github-action-typescript-template",
   "version": "1.0.0",
-  "root": true,
   "description": "This action will do ${DESCRIBE_ME}",
-  "main": "lib/main.js",
-  "files": ["lib"],
-  "type": "module",
-  "displayName": "bitflight-devops/github-action-typescript-template",
+  "license": "MIT",
+  "author": "Jamie Nelson <jamie@bitflight.io>",
   "repository": {
     "type": "git",
     "url": "git@github.com:bitflight-devops/github-action-typescript-template.git"
@@ -14,64 +12,45 @@
   "bugs": {
     "url": "https://github.com/bitflight-devops/github-action-typescript-template/issues"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com"
-  },
-  "keywords": ["actions", "github", "node16", "jira", "tickets"],
-  "author": "Jamie Nelson <jamie@bitflight.io>",
-  "license": "MIT",
-  "private": true,
+  "type": "module",
+  "main": "lib/main.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "tsc": "tsc --project tsconfig.json",
-    "test": "NODE_ENV=testing jest",
-    "test-ci": "NODE_ENV=testing jest --ci --reporters=default --reporters=jest-junit",
-    "typecheck": "tsc --noEmit --project tsconfig.json",
+    "pre-commit": "yarn run lint:fix && yarn run build && git add lib && yarn run generate-docs",
+    "pre-push": "yarn format",
+    "all": "yarn run build && yarn run format && yarn run lint && yarn run package && yarn test",
     "build": "rimraf lib;yarn run typecheck;node .github/scripts/esbuild.cjs",
     "clean": "rimraf lib",
+    "commit": "git-cz",
     "format": "trunk check",
     "format:all": "trunk check --all",
     "format:fix": "trunk fmt",
     "format:fix:all": "trunk fmt --all",
-    "markdownlint": "markdownlint --config=.markdownlint.yaml --ignore-path=.markdownlintignore",
+    "generate-docs": "github-action-readme-generator && prettier --write .ghadocs.json README.md && git add .ghadocs.json README.md",
     "lint": "eslint --format 'visualstudio' --color --ext .html,.js,.json,.jsx,.md,.ts,.tsx,.yml,.yaml .",
     "lint:fix": "yarn run lint --fix",
     "lint:markdown": "yarn markdownlint \"**/*.md\"",
     "lint:markdown:fix": "yarn lint:markdown --fix",
-    "all": "yarn run build && yarn run format && yarn run lint && yarn run package && yarn test",
-    "commit": "git-cz",
-    "pre-commit": "yarn run lint:fix && yarn run build && git add lib && yarn run generate-docs",
-    "pre-push": "yarn format",
+    "markdownlint": "markdownlint --config=.markdownlint.yaml --ignore-path=.markdownlintignore",
+    "prepare": "husky install;git config --global rebase.autosquash true",
+    "test": "NODE_ENV=testing jest",
+    "test-ci": "NODE_ENV=testing jest --ci --reporters=default --reporters=jest-junit",
+    "tsc": "tsc --project tsconfig.json",
+    "typecheck": "tsc --noEmit --project tsconfig.json",
     "preversion": "echo 'Running test';yarn test",
     "version": "echo 'Run versioning commands';yarn run generate-docs;echo \"::set-output name=tag::v${npm_package_version}\"",
-    "postversion": "echo 'Running post versioning commands';git add . && git commit -m 'update package version' && git push --tags -f && git push && echo \"Successfully released version $npm_package_version!\"",
-    "generate-docs": "github-action-readme-generator && prettier --write .ghadocs.json README.md && git add .ghadocs.json README.md",
-    "prepare": "husky install;git config --global rebase.autosquash true"
+    "postversion": "echo 'Running post versioning commands';git add . && git commit -m 'update package version' && git push --tags -f && git push && echo \"Successfully released version $npm_package_version!\""
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "commitlint": {
-    "extends": ["@commitlint/config-conventional"],
-    "rules": {
-      "body-max-length": [0],
-      "body-max-line-length": [0],
-      "footer-max-length": [0],
-      "footer-max-line-length": [0],
-      "header-max-length": [0]
-    }
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "exports": {
-    ".": {
-      "import": "./src/index.ts",
-      "require": "./lib/main.js"
-    },
-    "./package.json": "./package.json"
+  "resolutions": {
+    "eslint": "^8.14.0",
+    "eslint-plugin-import": "^2.26.0"
   },
   "dependencies": {
     "@actions/core": "^1.7.0",
@@ -84,25 +63,21 @@
     "tslib": "^2.4.0",
     "yaml": "^2.0.1"
   },
-  "resolutions": {
-    "eslint": "^8.2.0",
-    "eslint-plugin-import": "^2.25.2"
-  },
   "devDependencies": {
     "@Broadshield/prettier-config": "github:Broadshield/prettier-config",
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
-    "@commitlint/prompt": "^16.2.3",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@commitlint/prompt": "^16.2.4",
     "@octokit/graphql-schema": "^10.73.0",
     "@prettier/plugin-ruby": "^2.1.0",
     "@prettier/plugin-xml": "^2.1.0",
-    "@trunkio/launcher": "^1.0.5",
+    "@trunkio/launcher": "^1.1.0",
     "@tsconfig/node16": "^1.0.2",
     "@types/jest": "^27.4.1",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.182",
-    "@types/node": "^17.0.27",
-    "@types/web": "^0.0.61",
+    "@types/node": "^17.0.31",
+    "@types/web": "^0.0.63",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "@typescript-eslint/typescript-estree": "^5.21.0",
@@ -110,7 +85,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.0.0",
     "esbuild": "^0.14.38",
-    "eslint": "^8.2.0",
+    "eslint": "^8.14.0",
     "eslint-config-adjunct": "^4.11.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -122,7 +97,7 @@
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-github": "^4.3.6",
     "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-jest-async": "^1.0.3",
     "eslint-plugin-json": "^3.1.0",
@@ -147,11 +122,11 @@
     "esm": "^3.2.25",
     "github-action-readme-generator": "^1.0.13",
     "husky": "^7.0.4",
-    "jest": "^27.0.0",
-    "jest-circus": "^27.0.0",
+    "jest": "^28.0.3",
+    "jest-circus": "^28.0.3",
     "jest-junit": "^13.2.0",
     "js-yaml": "^4.1.0",
-    "lint-staged": "^12.4.0",
+    "lint-staged": "^12.4.1",
     "markdownlint": "^0.25.1",
     "markdownlint-cli": "^0.31.1",
     "prettier": "^2.6.2",
@@ -162,9 +137,53 @@
     "semantic-release": "^19.0.2",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3",
+    "typescript": "^4.6.4",
     "typescript-eslint-language-service": "^5.0.0",
     "yarn-or-npm": "^3.0.1"
+  },
+  "keywords": [
+    "actions",
+    "github",
+    "jira",
+    "node16",
+    "tickets"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-length": [
+        0
+      ],
+      "body-max-line-length": [
+        0
+      ],
+      "footer-max-length": [
+        0
+      ],
+      "footer-max-line-length": [
+        0
+      ],
+      "header-max-length": [
+        0
+      ]
+    }
+  },
+  "displayName": "bitflight-devops/github-action-typescript-template",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./lib/main.js"
+    },
+    "./package.json": "./package.json"
   },
   "jest-junit": {
     "suiteNameTemplate": "{filepath}",
@@ -173,8 +192,11 @@
   },
   "lint-staged": {
     "{src,__tests__}/**/*.js": "eslint --cache --fix",
-    "*.ts": ["eslint --cache --fix"],
+    "*.ts": [
+      "eslint --cache --fix"
+    ],
     "*.{html,js,json,jsx,md,ts,tsx,yml,yaml}": "eslint --cache --fix"
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "root": true
 }

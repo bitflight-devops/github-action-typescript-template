@@ -5,15 +5,8 @@
     "baseUrl": ".",
     "module": "commonjs"
   },
-  "include": [
-    "src/**/*.ts",
-    "__tests__/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "lib"
-  ],
+  "include": ["src/**/*.ts", "__tests__/**/*.ts"],
+  "exclude": ["node_modules", "dist", "lib"],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "GitHub Actions (Node 12)"
 }

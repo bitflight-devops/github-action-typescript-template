@@ -20,10 +20,7 @@
     "noUnusedParameters": true,
     "strict": true /* Enable all strict type-checking options. */,
     "noImplicitAny": true /* Raise error on expressions and declarations with an implied "any" type. */,
-    "typeRoots": [
-      "node_modules/@types/",
-      "src/@types/"
-    ],
+    "typeRoots": ["node_modules/@types/", "src/@types/"],
     // Ensure that Babel can safely transpile files in the TypeScript project
     "plugins": [
       {
@@ -31,33 +28,15 @@
       }
     ],
     "paths": {
-      "@types/*": [
-        "src/@types/*"
-      ],
-      "base-action-classes/*": [
-        "src/base-action-classes"
-      ],
-      "queries/*": [
-        "src/queries/*"
-      ],
-      "helpers/*": [
-        "src/helpers/*"
-      ],
-      "__tests__/*": [
-        "__tests__/*"
-      ]
+      "@types/*": ["src/@types/*"],
+      "base-action-classes/*": ["src/base-action-classes"],
+      "queries/*": ["src/queries/*"],
+      "helpers/*": ["src/helpers/*"],
+      "__tests__/*": ["__tests__/*"]
     }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "__tests__",
-    "dist",
-    "lib",
-    "jest.config.ts"
-  ],
+  "include": ["src"],
+  "exclude": ["node_modules", "__tests__", "dist", "lib", "jest.config.ts"],
   "display": "GitHub Actions (Node 16)",
   "extends": "@tsconfig/node16/tsconfig.json"
 }

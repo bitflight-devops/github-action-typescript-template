@@ -1,8 +1,11 @@
 dist/
 lib/
 node_modules/
-/.git/
+.git/
 README.md
 /.trunk/
 /.husky/
 /.vscode/
+package-lock.json
+yarn.lock
+package.json

@@ -1,9 +1,4 @@
-query listCommitMessagesInPullRequest(
-  $owner: String!
-  $repo: String!
-  $prNumber: Int!
-  $after: String
-) {
+query listCommitMessagesInPullRequest($owner: String!, $repo: String!, $prNumber: Int!, $after: String) {
   repository(owner: $owner, name: $repo) {
     pullRequest(number: $prNumber) {
       baseRef {

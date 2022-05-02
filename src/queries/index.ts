@@ -1,11 +1,5 @@
 import { graphql } from '@octokit/graphql';
-import {
-  CommitHistoryConnection,
-  GitObject,
-  Maybe,
-  Ref,
-  Repository,
-} from '@octokit/graphql-schema';
+import { CommitHistoryConnection, GitObject, Maybe, Ref, Repository } from '@octokit/graphql-schema';
 
 export interface CommitHistory extends GitObject {
   history?: Maybe<CommitHistoryConnection>;

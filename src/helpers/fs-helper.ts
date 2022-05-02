@@ -24,9 +24,7 @@ export function directoryExistsSync(path: string, required?: boolean): boolean {
       throw new Error(`Directory '${path}' does not exist`);
     }
 
-    throw new Error(
-      `Encountered an error when checking whether path '${path}' exists: ${error.message}`,
-    );
+    throw new Error(`Encountered an error when checking whether path '${path}' exists: ${error.message}`);
   }
 }
 
@@ -42,9 +40,7 @@ export function existsSync(path: string): boolean {
       return false;
     }
 
-    throw new Error(
-      `Encountered an error when checking whether path '${path}' exists: ${error.message}`,
-    );
+    throw new Error(`Encountered an error when checking whether path '${path}' exists: ${error.message}`);
   }
 
   return true;
@@ -67,9 +63,7 @@ export function fileExistsSync(path: string): boolean {
       return false;
     }
 
-    throw new Error(
-      `Encountered an error when checking whether path '${path}' exists: ${error.message}`,
-    );
+    throw new Error(`Encountered an error when checking whether path '${path}' exists: ${error.message}`);
   }
 }
 
