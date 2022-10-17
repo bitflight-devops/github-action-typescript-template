@@ -18,4 +18,4 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://npm.pkg.github.com'
       - name: Release GitHub Action
-        uses: technote-space/release-github-actions@v7
+        uses: technote-space/release-github-actions@v8
